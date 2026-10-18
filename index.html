@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LovelyData</title>
+<meta name="description" content="Open, documented data on Aruba, and the tools to read it.">
+<link rel="icon" href="assets/lovelydata-logo.png">
+<style>
+:root{--blue:#44759e;--orange:#f38439;--sand:#dee3c8;--green:#749c4c;--brown:#605b54;--ink:#22201d;--muted:#6b665e;--line:#e6e3da;--bg:#ffffff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
+header img{height:34px;width:auto;display:block}
+nav a{margin-left:22px;color:var(--brown);text-decoration:none;font-size:15px}
+nav a:hover{color:var(--blue)}
+.hero{padding:64px 0 40px}
+.hero h1{font-size:44px;line-height:1.1;margin:0 0 14px;letter-spacing:-.5px;max-width:760px}
+.hero p{font-size:19px;color:var(--muted);max-width:680px;margin:0}
+.bars{display:flex;gap:6px;margin:28px 0 0;height:10px}
+.bars i{flex:1;border-radius:2px}
+section{padding:36px 0;border-top:1px solid var(--line)}
+section h2{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--brown);margin:0 0 18px}
+.feature{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center}
+@media(max-width:760px){.feature{grid-template-columns:1fr}.hero h1{font-size:34px}}
+.shot-img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)}
+.feature .shot{background:#1d1c1a;border-radius:10px;padding:16px;min-height:220px;display:flex;align-items:flex-end;gap:3px}
+.feature .shot i{display:block;width:100%;border-radius:2px 2px 0 0}
+.feature h3{font-size:24px;margin:0 0 10px}
+.feature p{margin:0 0 16px;color:var(--muted)}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;font-weight:600}
+.btn:hover{background:#365f80}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:18px;border-top:4px solid var(--c)}
+.card h3{margin:0 0 8px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a href="./"><img src="assets/lovelydata-logo.png" alt="LovelyData"></a>
+  <nav><a href="#lab">Lab</a><a href="#work">Work</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Aruba&#8217;s data, made usable.</h1>
+    <p>Open, documented data on Aruba and the tools to read it. Every figure here traces back to its source, so you can check it, reuse it and build on it.</p>
+    <div class="bars"><i style="background:var(--blue)"></i><i style="background:var(--orange)"></i><i style="background:var(--sand)"></i><i style="background:var(--green)"></i><i style="background:var(--brown)"></i></div>
+  </div>
+
+  <section id="lab">
+    <h2>Lab</h2>
+    <div class="feature">
+      <a href="aruba-population/"><img class="shot-img" src="assets/pyramid-preview.jpg" alt="Interactive population pyramid of Aruba, 2018 shown"></a>
+      <div>
+        <h3>Aruba&#8217;s population, year by year</h3>
+        <p>Thirty-five years of CBS population figures by age and sex, on one slider. See which age groups grew and which shrank each year, and follow the same people five years on to see who arrived and who left.</p>
+        <a class="btn" href="aruba-population/">Open the interactive pyramid</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2>Work</h2>
+    <div class="cards">
+      <div class="card" style="--c:var(--blue)"><h3>Data you can trust</h3><p>Series on population, tourism and the economy, cleaned, checked against their sources and documented, with the vintage of every number kept.</p></div>
+      <div class="card" style="--c:var(--orange)"><h3>Analysis and visuals</h3><p>Reproducible analysis in R, from a single chart to a full study, built so the next update is a rerun and not a rebuild.</p></div>
+      <div class="card" style="--c:var(--green)"><h3>Training</h3><p>Hands-on R training for teams that want to do this themselves, using their own data from the first session.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Rendell de Kort and Lay Hing de Kort-Yee. Write to <a href="mailto:rendell@c-economics.com">rendell@c-economics.com</a>.</p>
+  </section>
+</main>
+
+<footer><div class="wrap">LovelyData is a trade name of Capstone Research Group VBA, Aruba, alongside Cornerstone Economics.</div></footer>
+
+</body>
+</html>
