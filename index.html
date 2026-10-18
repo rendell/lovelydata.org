@@ -26,6 +26,7 @@ section{padding:36px 0;border-top:1px solid var(--line)}
 section h2{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--brown);margin:0 0 18px}
 .feature{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center}
 @media(max-width:760px){.feature{grid-template-columns:1fr}.hero h1{font-size:34px}}
+@media(max-width:560px){nav a{margin-left:12px;font-size:14px}nav a.wide{display:none}header img{height:26px}}
 .shot-img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)}
 .feature .shot{background:#1d1c1a;border-radius:10px;padding:16px;min-height:220px;display:flex;align-items:flex-end;gap:3px}
 .feature .shot i{display:block;width:100%;border-radius:2px 2px 0 0}
@@ -45,7 +46,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);f
 <body>
 <header><div class="wrap">
   <a href="./"><img src="assets/lovelydata-logo.png" alt="LovelyData"></a>
-  <nav><a href="#lab">Stories</a><a href="#work">Work with us</a><a href="#contact">Contact</a></nav>
+  <nav><a href="#lab">Stories</a><a href="data/">Data</a><a class="wide" href="#work">Work with us</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -71,7 +72,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);f
   <section id="work">
     <h2>Work with us</h2>
     <div class="cards">
-      <div class="card" style="--c:var(--blue)"><h3>A regional database</h3><p>Population, tourism and economic series for small islands, checked against their sources, with every revision preserved.</p></div>
+      <div class="card" style="--c:var(--blue)"><h3>A regional database</h3><p>Population, tourism and economic series for small islands, checked against their sources, with every revision preserved. <a href="data/">See what is in it</a>.</p></div>
       <div class="card" style="--c:var(--orange)"><h3>Custom data and dashboards</h3><p>The series behind a decision, built and maintained for your organisation, from a single indicator to a full dashboard.</p></div>
       <div class="card" style="--c:var(--green)"><h3>Training</h3><p>Hands-on R training for teams that want to do this themselves, using their own data from the first session.</p></div>
     </div>

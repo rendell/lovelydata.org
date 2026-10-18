@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The database | LovelyData</title>
+<meta name="description" content="The series in the LovelyData database: population, tourism and the economy of Aruba and the region, from public sources, checked and versioned.">
+<link rel="icon" href="../assets/lovelydata-logo.png">
+<style>
+:root{--blue:#44759e;--orange:#f38439;--sand:#dee3c8;--green:#749c4c;--brown:#605b54;--ink:#22201d;--muted:#6b665e;--line:#e6e3da;--grid:#eeece6;--bg:#ffffff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px;gap:12px}
+header img{height:34px;width:auto;display:block}
+nav a{margin-left:22px;color:var(--brown);text-decoration:none;font-size:15px}
+nav a:hover,nav a[aria-current]{color:var(--blue)}
+@media(max-width:520px){nav a{margin-left:12px;font-size:14px}header img{height:26px}}
+.hero{padding:48px 0 26px}
+.hero h1{font-size:38px;line-height:1.12;margin:0 0 12px;letter-spacing:-.4px}
+@media(max-width:600px){.hero h1{font-size:30px}}
+.hero p{font-size:18px;color:var(--muted);max-width:700px;margin:0}
+.counts{display:flex;gap:30px;flex-wrap:wrap;margin:24px 0 0}
+.counts div{font-size:13px;color:var(--muted)}.counts b{display:block;font-size:26px;color:var(--ink);line-height:1.2}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px;font:inherit;font-size:14px;color:var(--brown);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+input[type=search]{flex:1;min-width:200px;border:1px solid var(--line);border-radius:7px;padding:8px 11px;font:inherit;font-size:14px}
+.shown{font-size:13px;color:var(--muted);margin:0 0 6px}
+.list{display:grid;gap:10px;margin:0 0 30px}
+.item{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:6px 18px}
+@media(max-width:760px){.item{grid-template-columns:1fr}}
+.item h3{margin:0 0 3px;font-size:16px}
+.item .detail{margin:0;color:var(--muted);font-size:14px}
+.meta{font-size:13.5px;color:var(--ink)}.meta span{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.tag{display:inline-block;font-size:12px;color:var(--brown);background:#f6f5f1;border-radius:4px;padding:1px 7px;margin:5px 6px 0 0}
+.tag.story{background:var(--sand)}
+section{padding:34px 0;border-top:1px solid var(--line)}
+section h2{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--brown);margin:0 0 16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:18px;border-top:4px solid var(--c)}
+.card h3{margin:0 0 4px;font-size:18px}
+.card .when{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.prose{max-width:720px;color:var(--ink)}.prose p{margin:0 0 12px}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a href="../"><img src="../assets/lovelydata-logo.png" alt="LovelyData"></a>
+  <nav><a href="../#lab">Stories</a><a href="./" aria-current="page">Data</a><a href="../#contact">Contact</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>The database</h1>
+    <p>Every series here comes from a public release. We type or extract it from the original, check it against the printed totals, keep the labels consistent from year to year, and store each revision next to the figure it replaced.</p>
+    <div class="counts" id="counts"></div>
+  </div>
+
+  <div class="tools" role="search">
+    <span id="chips"></span>
+    <input type="search" id="q" placeholder="Search series, sources or years" aria-label="Search the catalogue">
+  </div>
+  <p class="shown" id="shown"></p>
+  <div class="list" id="list"></div>
+
+  <section>
+    <h2>Getting the data</h2>
+    <div class="cards">
+      <div class="card" style="--c:var(--blue)"><p class="when">Now</p><h3>In the stories</h3><p>The series behind each story can be downloaded from the story itself, with the sources and the method.</p></div>
+      <div class="card" style="--c:var(--green)"><p class="when">Now</p><h3>On request</h3><p>Need a series from this list, or a cut of it? Ask, and we send it with its sources and every caveat we know about.</p></div>
+      <div class="card" style="--c:var(--orange)"><p class="when">Planned</p><h3>A data service</h3><p>Subscription access to the full database, with downloads and an API that updates as new releases come out.</p></div>
+    </div>
+    <div class="prose" style="margin-top:22px">
+      <p>The data service is being designed now. If your organisation would use it, tell us which series and how often you need them, because that decides what gets built first: <a href="mailto:rendell@c-economics.com?subject=LovelyData%20data%20service">rendell@c-economics.com</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">LovelyData is a trade name of Capstone Research Group VBA, Aruba, alongside Cornerstone Economics. Source data remain the property of their publishers; we cite each one.</div></footer>
+
+<script id="catalog" type="application/json">
+[
+ {"t":"Population by age and sex","topic":"Population","cov":"1991-2025, end of year (2025 provisional); totals from 1985","d":"Twenty five-year age bands by sex, with two vintages kept side by side.","src":"CBS Aruba","story":"../aruba-population/"},
+ {"t":"Key demographic indicators","topic":"Population","cov":"1991-2025 Q1, annual","d":"54 indicators: population, growth, natural growth, net migration, ageing and fertility.","src":"CBS Aruba"},
+
+ {"t":"Stay-over visitors by age and generation","topic":"Tourism","cov":"Full years 2019, 2022-2025; 2026 by month","d":"Eight age bands and six generations, full year, year to date and single month, every revision kept.","src":"Aruba Tourism Authority, monthly reports"},
+ {"t":"Stay-over arrivals by market, long run","topic":"Tourism","cov":"1986-2021, annual","d":"Seven source markets.","src":"Centrale Bank van Aruba, Statistical Digest 2021"},
+ {"t":"Stay-over arrivals by market, detailed","topic":"Tourism","cov":"2018-2020, annual","d":"Fourteen source markets.","src":"Tourism Analytics, from ATA data"},
+ {"t":"Arrivals and nights by market, current","topic":"Tourism","cov":"2025-2026, year to date and month","d":"26 markets plus US states; nights and average length of stay.","src":"Aruba Tourism Authority, monthly reports"},
+ {"t":"Visitor nights by country of residence","topic":"Tourism","cov":"2009-2025, annual","d":"Twelve markets.","src":"CBS Aruba, from ATA data"},
+ {"t":"Monthly stay-over visitors","topic":"Tourism","cov":"2018-2020, monthly","d":"Total stay-over arrivals by month.","src":"Tourism Analytics, from ATA and CBA data"},
+ {"t":"Tourism-equivalent population","topic":"Tourism","cov":"1998-2025, annual","d":"Visitor nights, cruise visitors, residents, and visitors as a share of everyone on the island on an average day.","src":"CBS Aruba"},
+ {"t":"Statistical Yearbook tourism tables, every edition","topic":"Tourism","cov":"1991-2015, 18 editions","d":"10,421 printed values: arrivals, nights, length of stay, accommodation, travel arrangement, income, spending, hotel rooms, age groups, all vintages.","src":"CBS Aruba, Statistical Yearbooks"},
+ {"t":"Market concentration index","topic":"Tourism","cov":"Aruba 1986-2021; Curaçao 2010-2018; Bonaire 2016-2017","d":"Herfindahl-Hirschman index of source-market dependence, computed by LovelyData.","src":"Derived from CBA and Tourism Analytics","isl":"Aruba, Curaçao, Bonaire"},
+ {"t":"Caribbean arrivals comparison","topic":"Tourism","cov":"January-June 2026 against 2025","d":"Stay-over arrivals in eleven Caribbean destinations.","src":"Caribbean Tourism Organization, via ATA","isl":"Caribbean"},
+ {"t":"Airlines and gateway airports","topic":"Tourism","cov":"2025-2026, year to date and month","d":"Arrivals by carrier and by departure airport.","src":"Aruba Tourism Authority, monthly reports"},
+ {"t":"Guest experience index","topic":"Tourism","cov":"Monthly, January 2024-July 2026","d":"Online review rating and review volume, with dimensions by period.","src":"Aruba Tourism Authority, monthly reports"},
+
+ {"t":"Visitor spending by region","topic":"Spending","cov":"2025","d":"Spending per visitor for three source regions, from the airport exit survey.","src":"Aruba Tourism Authority, Spending Insights 2025"},
+ {"t":"Tourism credits","topic":"Spending","cov":"Quarterly, 2024-2026 Q2","d":"Tourism foreign-exchange credits in florins, with the 2025 reclassification documented.","src":"Aruba Tourism Authority, from CBA and Visa"},
+ {"t":"Card spending by visitors","topic":"Spending","cov":"Q2 2026; lodging Q3 2024-Q2 2026","d":"Visa card spending by type, category and sub-category.","src":"Aruba Tourism Authority, from Visa"},
+ {"t":"Tourism receipts","topic":"Spending","cov":"2000-2010, annual","d":"Total travel receipts, BPM6 basis.","src":"Centrale Bank van Aruba, Statistical Digest 2021"},
+
+ {"t":"Arrivals and nights by type of accommodation","topic":"Accommodation","cov":"Arrivals 2015-2025 (no 2018); nights 2015-2017, 2022-2025","d":"Hotels, timeshare and other, from immigration counts.","src":"CHTA monthly updates, Tourism Analytics, ATA December reports"},
+ {"t":"Accommodation by plan and market","topic":"Accommodation","cov":"Full years 2022-2025; 2026 by month","d":"European plan, all-inclusive, timeshare and other, by source market.","src":"Aruba Tourism Authority, monthly reports"},
+ {"t":"Guest nights by type of accommodation, estimated","topic":"Accommodation","cov":"2009-2019, annual","d":"A LovelyData estimate: hotel and timeshare room nights times guests per room, calibrated to 2015-2017, with other accommodation as the residual.","src":"Derived from CBS, CBA and ATA releases"},
+ {"t":"Hotel and timeshare statistics","topic":"Accommodation","cov":"2009-2019, yearly and monthly","d":"Rooms, occupancy, room nights, average daily rate and revenue per available room.","src":"CBS Aruba"},
+ {"t":"Hotel performance","topic":"Accommodation","cov":"2018-2020, monthly","d":"Occupancy, average daily rate and revenue per available room.","src":"Tourism Analytics"},
+ {"t":"Type of accommodation used, survey","topic":"Accommodation","cov":"2000-2019, annual","d":"Shares of surveyed visitors by place of stay.","src":"CBS Aruba"},
+ {"t":"Vacation rentals","topic":"Accommodation","cov":"June-July 2026 and year to date","d":"Occupancy, average daily rate and revenue.","src":"Aruba Tourism Authority, from Lighthouse"},
+
+ {"t":"Cruise calls and passengers","topic":"Cruise","cov":"2018-2020 monthly; 2025-2026 year to date and month","d":"Ship calls and passengers.","src":"Tourism Analytics; Aruba Tourism Authority"},
+ {"t":"Cruise visitor survey","topic":"Cruise","cov":"2025","d":"Who cruise visitors are and what they do and spend ashore, 2,422 respondents.","src":"Aruba Tourism Authority"},
+
+ {"t":"Gross domestic product","topic":"Economy","cov":"1986-2021, annual","d":"Eight indicators, nominal and real.","src":"Centrale Bank van Aruba, Statistical Digest 2021"},
+ {"t":"Consumer prices and inflation","topic":"Economy","cov":"1986-2021, annual","d":"Price index and two inflation measures.","src":"Centrale Bank van Aruba, Statistical Digest 2021"},
+ {"t":"Tourism indicators","topic":"Economy","cov":"1986-2021, annual","d":"Fourteen indicators from the central bank's tourism table.","src":"Centrale Bank van Aruba, Statistical Digest 2021"},
+ {"t":"Balance of payments","topic":"Economy","cov":"2000-2021, annual","d":"Current account, BPM6.","src":"Centrale Bank van Aruba, Statistical Digest 2021"},
+ {"t":"Statistical Digest, complete","topic":"Economy","cov":"1984-2022, annual","d":"All 83 tables of the digest in machine-readable form, about 40,400 values.","src":"Centrale Bank van Aruba, Statistical Digest 2021"}
+]
+</script>
+<script>
+// Iteration: 1
+var DATA=JSON.parse(document.getElementById("catalog").textContent);
+var COLOR={Population:"var(--blue)",Tourism:"var(--orange)",Spending:"var(--green)",Accommodation:"var(--brown)",Cruise:"var(--blue)",Economy:"var(--green)"};
+var TOPICS=["All"].concat(DATA.map(function(d){return d.topic;}).filter(function(t,i,a){return a.indexOf(t)===i;}));
+var cur="All";
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+document.getElementById("counts").innerHTML="<div><b>"+DATA.length+"</b>series</div><div><b>"+(TOPICS.length-1)+"</b>topics</div><div><b>1984-2026</b>years covered</div><div><b>Aruba</b>first, the region next</div>";
+var chips=document.getElementById("chips");
+TOPICS.forEach(function(t){var b=document.createElement("button");b.className="chip";b.textContent=t;b.setAttribute("aria-pressed",t===cur?"true":"false");b.onclick=function(){cur=t;chips.querySelectorAll("button").forEach(function(o){o.setAttribute("aria-pressed",o===b?"true":"false");});render();};chips.appendChild(b);chips.appendChild(document.createTextNode(" "));});
+function render(){
+  var q=document.getElementById("q").value.toLowerCase().trim();
+  var rows=DATA.filter(function(d){return (cur==="All"||d.topic===cur)&&(!q||(d.t+" "+d.d+" "+d.src+" "+d.cov+" "+d.topic+" "+(d.isl||"Aruba")).toLowerCase().indexOf(q)>-1);});
+  document.getElementById("shown").textContent=rows.length+" of "+DATA.length+" series";
+  document.getElementById("list").innerHTML=rows.map(function(d){
+    return "<div class='item' style='--c:"+COLOR[d.topic]+"'><div><h3>"+esc(d.t)+"</h3><p class='detail'>"+esc(d.d)+"</p><span class='tag'>"+esc(d.topic)+"</span><span class='tag'>"+esc(d.isl||"Aruba")+"</span>"+(d.story?"<a class='tag story' href='"+d.story+"'>See the story</a>":"")+"</div>"+
+      "<div class='meta'><span>Coverage</span>"+esc(d.cov)+"</div><div class='meta'><span>Source</span>"+esc(d.src)+"</div></div>";
+  }).join("")||"<p class='shown'>Nothing matches. Ask us: the series may be on its way.</p>";
+}
+document.getElementById("q").addEventListener("input",render);
+render();
+</script>
+</body>
+</html>

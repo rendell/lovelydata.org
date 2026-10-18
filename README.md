@@ -4,6 +4,7 @@ Public site of LovelyData, a trade name of Capstone Research Group VBA (Aruba). 
 
 - `index.html` - landing page (LovelyData palette, white background).
 - `aruba-population/index.html` - interactive population pyramid, 1991-2025. **Do not edit here.** It is generated in the knowledge hub by `01-projects/aruba-demographic-pyramid/build_delta_pyramid.R` from CBS data documented in `aruba-data/datasets/cbs-population-age-sex/`; rebuild there and copy the output in.
+- `data/index.html` - the database catalogue. One JSON block in the page lists the series; **public sources only** (no TES microdata or other internal sets). Add a row when a public dataset lands in the hub `aruba-data/CATALOG.md`.
 - `assets/` - logo and preview image.
 - `CNAME` - custom domain `lovelydata.org` (DNS at GoDaddy; mail stays on the GoDaddy Microsoft 365 mailbox, so never touch the MX, TXT or autodiscover records).
 
