@@ -92,7 +92,7 @@ function slicePieces(i, k, front, out){
   const arc = (r1, r2, a1, a2, n) => { const pts = []; for (let j = 0; j <= n; j++) pts.push(P3(c, r1, a1 + (a2 - a1) * j / n));
     for (let j = n; j >= 0; j--) pts.push(P3(c, r2, a1 + (a2 - a1) * j / n)); return pts; };
   const band = arc(R0 + F * UNIT, RC(), 0, SPAN, 40);
-  if (front) { const back = arc(0.02, R0 + 3.25 * UNIT, 0, SPAN, 60);   /* Iteration: 18 - opaque backing: nothing behind shows through the front D */
+  if (front) { const back = arc(0.02, RC() + RW, 0, SPAN, 60);   /* Iteration: 21 - backing stops at the wall, so the whorls below stay visible */   /* Iteration: 18 - opaque backing: nothing behind shows through the front D */
     out.push({z: ZF - 1, draw: () => poly(back, "#ffffff", 1)}); }
   out.push({z: front ? ZF : zMean(band) - 0.5, draw: () => poly(band, C.sand, front ? 1 : al * 0.85)});
   for (let j = 0; j < K; j++) { const v = D.values[i][j], w = arc(R0, rv(v), j * da + GAP, (j + 1) * da - GAP, 6);
