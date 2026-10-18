@@ -85,6 +85,8 @@ function P3(c, r, ang){ const a = r * Math.sin(ang), bb = r * Math.cos(ang);
 const alphaOf = (c, k) => Math.max(0.06, Math.min(1, (k < 0 ? 1 + k : 1)) * Math.pow(c.f, 1.1));
 function poly(pts, col, a, stroke){ cx.beginPath(); pts.forEach((q, j) => j ? cx.lineTo(q.x, q.y) : cx.moveTo(q.x, q.y)); cx.closePath();
   cx.globalAlpha = a; cx.fillStyle = col; cx.fill(); if (stroke) { cx.strokeStyle = stroke; cx.lineWidth = 0.6; cx.stroke(); } cx.globalAlpha = 1; }
+function cut(pts){ cx.beginPath(); pts.forEach((q, j) => j ? cx.lineTo(q.x, q.y) : cx.moveTo(q.x, q.y)); cx.closePath();
+  cx.strokeStyle = "#ffffff"; cx.lineWidth = 3; cx.lineJoin = "round"; cx.stroke(); }
 const zMean = pts => pts.reduce((t, q) => t + q.z, 0) / pts.length;
 const da = SPAN / K, GAP = da * 0.12, RC = () => R0 + CEIL * UNIT;
 function slicePieces(i, k, front, out){
@@ -92,12 +94,12 @@ function slicePieces(i, k, front, out){
   const arc = (r1, r2, a1, a2, n) => { const pts = []; for (let j = 0; j <= n; j++) pts.push(P3(c, r1, a1 + (a2 - a1) * j / n));
     for (let j = n; j >= 0; j--) pts.push(P3(c, r2, a1 + (a2 - a1) * j / n)); return pts; };
   const band = arc(R0 + F * UNIT, RC(), 0, SPAN, 40);
-  if (front) { const back = arc(0.02, RC() + RW, 0, SPAN, 60);   /* Iteration: 21 - backing stops at the wall, so the whorls below stay visible */   /* Iteration: 18 - opaque backing: nothing behind shows through the front D */
-    out.push({z: ZF - 1, draw: () => poly(back, "#ffffff", 1)}); }
-  out.push({z: front ? ZF : zMean(band) - 0.5, draw: () => poly(band, C.sand, front ? 1 : al * 0.85)});
+  /* Iteration: 22 - no backing sheet: every front piece is opaque on its own, so the shell behind shows in the
+     gaps between the bars and nowhere else; a white edge cuts the front pieces out from what lies behind */
+  out.push({z: front ? ZF : zMean(band) - 0.5, draw: () => { poly(band, C.sand, front ? 1 : al * 0.85); if (front) cut(band); }});
   for (let j = 0; j < K; j++) { const v = D.values[i][j], w = arc(R0, rv(v), j * da + GAP, (j + 1) * da - GAP, 6);
-    out.push({z: front ? ZF + 1 : zMean(w), draw: () => poly(w, scol(status(v)), al)}); }
-  wall(c, i).forEach(w => out.push({z: front ? ZF + 1.5 : zMean(w) + 0.4, draw: () => poly(w, C.brown, front ? 0.9 : al * 0.7)}));
+    out.push({z: front ? ZF + 1 : zMean(w), draw: () => { poly(w, scol(status(v)), al); if (front) cut(w); }}); }
+  wall(c, i).forEach(w => out.push({z: front ? ZF + 1.5 : zMean(w) + 0.4, draw: () => { poly(w, C.brown, front ? 1 : al * 0.7); if (front) cut(w); }}));
   const rings = [F].map(bd => { const pts = []; for (let j = 0; j <= 40; j++) pts.push(P3(c, R0 + bd * UNIT, SPAN * j / 40)); return pts; });
   out.push({z: front ? ZF + 2 : zMean(band) + 0.5, draw: () => { rings.forEach((pts, n) => { cx.beginPath(); pts.forEach((q, j) => j ? cx.lineTo(q.x, q.y) : cx.moveTo(q.x, q.y));
     cx.globalAlpha = al; cx.strokeStyle = C.brown; cx.lineWidth = front ? 2.4 : 0.9; cx.setLineDash(n ? [10, 7] : []); cx.stroke(); cx.setLineDash([]); });
