@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LovelyData</title>
-<meta name="description" content="Open, documented data on Aruba, and the tools to read it.">
+<title>LovelyData: small islands, told with data</title>
+<meta name="description" content="Open, documented data on small islands, and the stories it tells.">
 <link rel="icon" href="assets/lovelydata-logo.png">
 <style>
 :root{--blue:#44759e;--orange:#f38439;--sand:#dee3c8;--green:#749c4c;--brown:#605b54;--ink:#22201d;--muted:#6b665e;--line:#e6e3da;--bg:#ffffff}
@@ -35,6 +35,7 @@ section h2{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:va
 .btn:hover{background:#365f80}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:760px){.cards{grid-template-columns:1fr}}
+.next{margin:22px 0 0;color:var(--muted);font-size:15px;border-left:3px solid var(--orange);padding-left:12px}
 .card{border:1px solid var(--line);border-radius:10px;padding:18px;border-top:4px solid var(--c)}
 .card h3{margin:0 0 8px;font-size:18px}
 .card p{margin:0;color:var(--muted);font-size:15px}
@@ -44,18 +45,18 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);f
 <body>
 <header><div class="wrap">
   <a href="./"><img src="assets/lovelydata-logo.png" alt="LovelyData"></a>
-  <nav><a href="#lab">Lab</a><a href="#work">Work</a><a href="#contact">Contact</a></nav>
+  <nav><a href="#lab">Stories</a><a href="#work">Work with us</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main class="wrap">
   <div class="hero">
-    <h1>Aruba&#8217;s data, made usable.</h1>
-    <p>Open, documented data on Aruba and the tools to read it. Every figure here traces back to its source, so you can check it, reuse it and build on it.</p>
+    <h1>Small islands, told with data.</h1>
+    <p>Island economies run on numbers that are scattered, late or hard to compare. We gather them, check them against their sources and turn them into stories anyone can follow. We start with Aruba and are building out across the region.</p>
     <div class="bars"><i style="background:var(--blue)"></i><i style="background:var(--orange)"></i><i style="background:var(--sand)"></i><i style="background:var(--green)"></i><i style="background:var(--brown)"></i></div>
   </div>
 
   <section id="lab">
-    <h2>Lab</h2>
+    <h2>Stories</h2>
     <div class="feature">
       <a href="aruba-population/"><img class="shot-img" src="assets/pyramid-preview.jpg" alt="Interactive population pyramid of Aruba, 2018 shown"></a>
       <div>
@@ -64,20 +65,21 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);f
         <a class="btn" href="aruba-population/">Open the interactive pyramid</a>
       </div>
     </div>
+    <p class="next">In the works: <b>ten years after the Airbnb arrival</b>, where Aruba&#8217;s visitors sleep now, and what changed since we first wrote about it in 2016.</p>
   </section>
 
   <section id="work">
-    <h2>Work</h2>
+    <h2>Work with us</h2>
     <div class="cards">
-      <div class="card" style="--c:var(--blue)"><h3>Data you can trust</h3><p>Series on population, tourism and the economy, cleaned, checked against their sources and documented, with the vintage of every number kept.</p></div>
-      <div class="card" style="--c:var(--orange)"><h3>Analysis and visuals</h3><p>Reproducible analysis in R, from a single chart to a full study, built so the next update is a rerun and not a rebuild.</p></div>
+      <div class="card" style="--c:var(--blue)"><h3>A regional database</h3><p>Population, tourism and economic series for small islands, checked against their sources, with every revision preserved.</p></div>
+      <div class="card" style="--c:var(--orange)"><h3>Custom data and dashboards</h3><p>The series behind a decision, built and maintained for your organisation, from a single indicator to a full dashboard.</p></div>
       <div class="card" style="--c:var(--green)"><h3>Training</h3><p>Hands-on R training for teams that want to do this themselves, using their own data from the first session.</p></div>
     </div>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Rendell de Kort. Write to <a href="mailto:rendell@c-economics.com">rendell@c-economics.com</a>.</p>
+    <p>Need a series that is not here yet, or a story told with your own data? Rendell de Kort, <a href="mailto:rendell@c-economics.com">rendell@c-economics.com</a>.</p>
   </section>
 </main>
 
